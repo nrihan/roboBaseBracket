@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import CompetitionList from './components/CompetitionList';
+import CompetitionForm from './components/CompetitionForm';
+import Menu from './components/Menu';
+import TournamentBracket from './components/TournamentBracket';
 
 function App() {
+  const handleAddCompetition = (newCompetition) => {
+    // Atualize a lista de competições ou execute qualquer ação necessária
+    console.log('Competition added:', newCompetition);
+  };
+
+  const [screen, setScreen] = useState('list');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Menu setScreen={setScreen} />
+      {screen === 'list' && <CompetitionList />}
+      {screen === 'create' && <CompetitionForm onAddCompetition={handleAddCompetition} />}
+      {screen === 'bracket' && <TournamentBracket />}
     </div>
   );
 }
